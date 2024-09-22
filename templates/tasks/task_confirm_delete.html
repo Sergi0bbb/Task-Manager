@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Task - {{ object.name }} - Task Manager{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Delete Task</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg">
+          <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">Confirm Delete</h3>
+          </div>
+          <div class="card-body">
+            <p class="lead text-center">
+              Are you sure you want to delete the task:
+              <strong>{{ object.name }}</strong>?
+            </p>
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="text-center">
+                <a href="{% url 'tasks:task-detail' object.pk %}"
+                   class="btn btn-secondary btn-lg">
+                  <i class="fas fa-times-circle"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-danger btn-lg">
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
