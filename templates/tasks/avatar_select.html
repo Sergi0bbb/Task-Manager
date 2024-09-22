@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+      .avatar {
+          width: 100px;
+          height: 100px;
+          border: 2px solid transparent;
+          border-radius: 50%;
+          cursor: pointer;
+          margin: 10px;
+          transition: border 0.3s;
+      }
+
+      .avatar:hover {
+          border-color: #007bff;
+      }
+      
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="text-center">Select avatar</h2>
+  <div class="row justify-content-center">
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar1.png" %}" alt="Avatar 1"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar2.png" %}" alt="Avatar 2"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar3.png" %}" alt="Avatar 3"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar4.png" %}" alt="Avatar 4"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar5.png" %}" alt="Avatar 5"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+    <div class="col-4 text-center">
+      <img src="{% static "avatars/avatar6.png" %}" alt="Avatar 6"
+           class="avatar" onclick="selectAvatar(this)">
+    </div>
+  </div>
+  <form id="avatarForm" class="text-center mt-4" action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="avatar" id="avatarInput">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+    function selectAvatar(img) {
+        document.getElementById('avatarInput').value = img.src;
+    }
+</script>
+</body>
+</html>
