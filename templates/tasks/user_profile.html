@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center display-4">User Profile</h2>
+
+    <div class="card shadow-lg">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <img src="{% static user.avatar %}" alt="User Avatar"
+               class="rounded-circle" width="150" height="150">
+        </div>
+
+        <form method="post" action="{% url 'tasks:user-profile' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name"
+                   name="first_name" value="{{ user.first_name }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name"
+                   name="last_name" value="{{ user.last_name }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="position" class="form-label">Position</label>
+            <input type="text" class="form-control" id="position"
+                   name="position" value="{{ user.position.name }}" required>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Update
+              Profile
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
