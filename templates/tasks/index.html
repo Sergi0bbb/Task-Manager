@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Dashboard - Home{% endblock %}
+
+{% block content %}
+  <div class="container d-flex justify-content-center">
+    <div class="col-md-10">
+      <h1 class="mb-5 text-center display-4">{% block header %}Tasks
+        Dashboard {% endblock %}</h1>
+
+      <div class="row mb-5 text-center">
+        <div class="col-md-4">
+          <div class="card text-center shadow-lg">
+            <div class="card-body">
+              <h4 class="card-title text-primary">Total Tasks</h4>
+              <p class="display-3">{{ num_tasks }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Completed Tasks Card -->
+        <div class="col-md-4">
+          <div class="card text-center shadow-lg">
+            <div class="card-body">
+              <h4 class="card-title text-success">Completed Tasks</h4>
+              <p class="display-3">{{ num_completed_tasks }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center shadow-lg">
+            <div class="card-body">
+              <h4 class="card-title text-danger">Uncompleted Tasks</h4>
+              <p class="display-3">{{ num_uncompleted_tasks }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h4 class="text-muted text-center mb-3">Task Completion Progress</h4>
+          <div class="progress" style="height: 40px;">
+            <div class="progress-bar bg-success" role="progressbar"
+                 style="width: {{ completion_percentage }}%;"
+                 aria-valuenow="{{ num_completed_tasks }}" aria-valuemin="0"
+                 aria-valuemax="{{ num_tasks }}">
+              <span
+                  class="lead font-weight-bold">{{ completion_percentage|floatformat:1 }}% Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if is_tasks_exist %}
+        <div class="col-md-12 mb-5">
+          <div class="card shadow-lg">
+            <div class="card-header bg-info text-white">
+              <h5>Task Priority Overview</h5>
+            </div>
+
+            <div class="card-body">
+              <canvas id="line-chart-1" height="120"></canvas>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="alert alert-success text-center" role="alert">
+          <h3>You don't have any uncompleted tasks! 😊</h3>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+      let ctx_tasks_per_week = document.getElementById('line-chart-1').getContext('2d');
+      let gradient_tasks_per_week = ctx_tasks_per_week.createLinearGradient(0, 0, 0, 400);
+      gradient_tasks_per_week.addColorStop(0, 'rgba(54, 162, 235, 0.5)');
+      gradient_tasks_per_week.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+      let lineChart_per_week = new Chart(ctx_tasks_per_week, {
+          type: 'line',
+          data: {
+              labels: {{ tasks_per_week.labels|safe }},
+              datasets: [{
+                  label: 'Number of Tasks',
+                  data: {{ tasks_per_week.data|safe }},
+                  backgroundColor: gradient_tasks_per_week,
+                  borderColor: 'rgba(15, 179, 194, 1)',
+                  borderWidth: 4,
+                  pointBackgroundColor: 'rgba(15, 179, 194, 1)',
+                  pointBorderColor: '#fff',
+                  pointHoverRadius: 10,
+                  pointHoverBackgroundColor: 'rgba(15, 179, 194, 1)',
+                  pointRadius: 12,
+                  fill: true,
+                  tension: 0.3,
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      grid: {
+                          display: true,
+                          color: "rgba(200, 200, 200, 0.3)"
+                      }
+                  },
+                  x: {
+                      grid: {
+                          display: false
+                      }
+                  }
+              },
+              responsive: true,
+              plugins: {
+                  legend: {
+                      display: true
+                  },
+                  tooltip: {
+                      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                      titleFont: {
+                          size: 16
+                      },
+                      bodyFont: {
+                          size: 14
+                      },
+                      cornerRadius: 5,
+                      caretPadding: 10
+                  }
+              }
+          }
+      });
+  </script>
+{% endblock %}
