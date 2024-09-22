@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<div class="sidebar bg-secondary vh-100" style="width: 250px; ">
+  <ul class="list-unstyled p-3">
+    <li class="mb-3">
+      <a href="{% url 'tasks:home_page' %}"
+         class="text-white d-block py-2 px-3 rounded menu-link">Task
+        Dashboard</a>
+    </li>
+    <li class="mb-3">
+      <a href="{% url 'tasks:calendar' %}"
+         class="text-white d-block py-2 px-3 rounded menu-link">Calendar</a>
+    </li>
+    <li class="mb-3">
+      <a href="{% url 'tasks:workers-list' %}"
+         class="text-white d-block py-2 px-3 rounded menu-link">Workers
+        list</a>
+    </li>
+    <li class="mb-3">
+      <a href="{% url 'tasks:task-create' %}"
+         class="text-white d-block py-2 px-3 rounded menu-link">Create task</a>
+    </li>
+  </ul>
+</div>
