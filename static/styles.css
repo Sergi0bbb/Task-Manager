@@ -1,0 +1,409 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #1abc9c;
+    --accent-color: #3498db;
+    --hover-color: #2980b9;
+    --background-color: #f8f9fa;
+    --header-color: #344a40;
+    --text-color: #4b4b4b;
+    --white: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    --font-size-base: 16px;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
+.sidebar {
+    background-color: var(--primary-color);
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: var(--spacing-lg) var(--spacing-md);
+    box-shadow: 2px 0 10px var(--shadow-color);
+    z-index: 999;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.sidebar:hover {
+    width: 280px;
+    background-color: #273c50;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    transform: translateX(10px);
+}
+
+.sidebar ul li a {
+    color: var(--white);
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 3px 6px var(--shadow-color);
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+.sidebar ul li a i {
+    margin-right: var(--spacing-sm);
+    font-size: 20px;
+}
+
+.sidebar ul li a.active {
+    background-color: var(--accent-color);
+    color: var(--white);
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    background-color: var(--header-color);
+    color: var(--white);
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - 250px);
+    left: 250px;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.sidebar:hover + header {
+    width: calc(100% - 280px);
+    left: 280px;
+}
+
+header .site-name {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    margin-left: var(--spacing-md);
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-md);
+}
+
+header .user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: var(--spacing-sm);
+    object-fit: cover;
+}
+
+header .user-info .username {
+    font-size: var(--font-size-lg);
+}
+
+.user-info .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu {
+    margin-top: var(--spacing-sm);
+}
+
+.container {
+    margin-left: 250px;
+    padding: 80px 20px 20px 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .container {
+    margin-left: 280px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    .sidebar:hover {
+        width: 220px;
+    }
+    .sidebar:hover + header {
+        width: calc(100% - 220px);
+        left: 220px;
+    }
+    .container {
+        margin-left: 200px;
+        padding: 80px 15px 15px 15px;
+    }
+    .sidebar:hover ~ .container {
+        margin-left: 220px;
+    }
+}
+
+.btn-info {
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.btn-info:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-info:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.5);
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.calendar {
+    margin: 40px auto;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    max-width: 80%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar th, .calendar td {
+    padding: var(--spacing-sm);
+    border: 1px solid #ddd;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.calendar th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.calendar td {
+    background-color: var(--white);
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+
+.calendar td:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.calendar .today {
+    background-color: var(--accent-color);
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+a.btn-info {
+    margin: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+}
+
+a.btn-info:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+@media (max-width: 768px) {
+    .calendar {
+        max-width: 100%;
+        padding: var(--spacing-md);
+    }
+    .calendar th, .calendar td {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
+    }
+}
+
+.list-group-item {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: var(--spacing-sm);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-group-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.list-group-item img {
+    margin-right: var(--spacing-sm);
+    transition: transform 0.3s ease;
+}
+
+.list-group-item img:hover {
+    transform: scale(1.1);
+}
+
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form-inline .btn {
+    margin-left: var(--spacing-sm);
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.card-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.card-text {
+    font-size: 1.1rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #1a252f;
+    transform: scale(1.02);
+}
+
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination .page-link {
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.pagination .active .page-link {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--white);
+}
