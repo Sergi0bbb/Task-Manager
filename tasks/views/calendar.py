@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.safestring import mark_safe

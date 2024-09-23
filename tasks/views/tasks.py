@@ -48,6 +48,7 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "tasks/task_detail.html"
     context_object_name = "task"
 
+
 class TaskUpdateView(
     LoginRequiredMixin,
     UserPassesTestMixin,

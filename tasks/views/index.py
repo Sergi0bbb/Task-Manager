@@ -1,6 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import QuerySet, Count, Case, When, Value, CharField, \
+from django.db.models import (
+    QuerySet,
+    Count,
+    Case,
+    When,
+    Value,
+    CharField,
     IntegerField
+)
 from django.shortcuts import render
 
 from dto.dto import GraphicDto
