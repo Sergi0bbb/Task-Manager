@@ -11,7 +11,7 @@
                class="rounded-circle" width="150" height="150">
         </div>
 
-        <form method="post" action="{% url 'tasks:user-profile' %}">
+        <form method="post" action="{% url 'worker-profile' %}">
           {% csrf_token %}
           <div class="mb-3">
             <label for="first_name" class="form-label">First Name</label>

@@ -79,8 +79,11 @@ class SelectAvatarView(LoginRequiredMixin, generic.View):
     def get(self, request: HttpRequest) -> HttpResponse:
         form = SelectAvatarForm()
 
-        return render(request, "tasks/avatar_select.html",
-                      context={"form": form})
+        return render(
+            request,
+            "tasks/avatar_select.html",
+            context={"form": form}
+        )
 
     def post(self, request: HttpRequest) -> HttpResponse:
         form = SelectAvatarForm(request.POST)
@@ -92,7 +95,7 @@ class SelectAvatarView(LoginRequiredMixin, generic.View):
             user.avatar = "/".join([split_url[-2], split_url[-1]])
             user.save()
 
-            return redirect("tasks:user-profile")
+            return redirect("tasks:worker-profile")
 
         return render(
             request,

@@ -20,7 +20,7 @@ from tasks.views.worker import (
 app_name = "tasks"
 
 urlpatterns = [
-    path("home_page/", index, name="home_page"),
+    path("", index, name="home_page"),
     path("workers/", WorkersListView.as_view(), name="workers-list"),
     path("workers/<int:pk>/", WorkersDetailView.as_view(), name="workers-detail"),
     path("accounts/sign_up/", WorkerCreateView.as_view(), name="sign_up"),
@@ -30,6 +30,6 @@ urlpatterns = [
     path("task/<int:pk>/complete/", complete_task, name="complete-task"),
     path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
     path("task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
-    path("profile/update/", worker_get_update_profile, name="user-profile"),
+    path("profile/update/", worker_get_update_profile, name="worker-profile"),
     path("profile/select_avatar/", SelectAvatarView.as_view(), name="select-avatar"),
 ]
