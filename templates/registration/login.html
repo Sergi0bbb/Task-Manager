@@ -13,7 +13,7 @@
       <h2 class="text-center mb-4">Login</h2>
 
       {% if next %}
-        <p>Please login to see this page.</p>
+        <p>Please log in to visit this site.</p>
       {% endif %}
       <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
@@ -22,7 +22,6 @@
         <a href="{% url 'tasks:sign_up' %}?next={{ request.path }}">Signup</a>
         <br>
         <button type="submit" class="btn btn-primary btn-block">Login</button>
-        <input type="hidden" name="next" value="{{ next }}"/>
       </form>
     </div>
   </div>
