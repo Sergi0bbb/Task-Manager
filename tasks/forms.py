@@ -1,9 +1,9 @@
+from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.utils import timezone
 
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from tasks.models import Position, Worker, Task
 
 
@@ -67,17 +67,18 @@ class TaskCreationForm(forms.ModelForm):
 
     def __init__(self, positions=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        queryset = get_user_model().objects.all()
         if positions:
             if len(positions) == 2:
-                self.fields["assignees"].queryset = get_user_model().objects.filter(
+                self.fields["assignees"].queryset = queryset.filter(
                     Q(position__name=positions[0]) | Q(position__name=positions[1])
                 )
             else:
-                self.fields["assignees"].queryset = get_user_model().objects.filter(
+                self.fields["assignees"].queryset = queryset.filter(
                     position__name=positions[0]
                 )
         else:
-            self.fields["assignees"].queryset = get_user_model().objects.all()
+            self.fields["assignees"].queryset = queryset
 
 
 class SelectAvatarForm(forms.ModelForm):
