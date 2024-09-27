@@ -30,13 +30,16 @@ class Worker(AbstractUser):
 
 
 class Task(models.Model):
-    PRIORITY_TYPE_CHOICES = [("L", "Low"), ("M", "Medium"), ("H", "High")]
+    class PriorityType(models.TextChoices):
+        LOW = "L"
+        MEDIUM = "M"
+        HIGH = "H"
 
     name = models.CharField(max_length=100)
     description = models.TextField()
     deadline = models.DateField()
     is_completed = models.BooleanField()
-    priority = models.CharField(choices=PRIORITY_TYPE_CHOICES, max_length=1)
+    priority = models.CharField(choices=PriorityType.choices, max_length=1)
     task_type = models.ForeignKey(
         TaskType,
         on_delete=models.CASCADE,
