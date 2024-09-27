@@ -44,12 +44,12 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(WorkersListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["search_form"] = WorkerSearchForm(self.request.GET)
         return context
 
     def get_queryset(self):
-        queryset = self.model.objects.select_related("position")
+        queryset = super().get_queryset().select_related("position")
         form = WorkerSearchForm(self.request.GET)
 
         if form.is_valid():
