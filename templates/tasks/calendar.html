@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="clearfix">
+    <h1 class="mb-4">{% block header %}Calendar for Tasks{% endblock %}</h1>
+    <span class="left m-2"
+          style="font-size: 20px;">Welcome, {{ request.user }}</span>
+    <a class="btn btn-info right mr-2" href="?{{ prev_month }}">&lt;&lt;
+      Previous Month</a>
+    <a class="btn btn-info right mr-2" href="?{{ next_month }}">Next Month &gt;&gt;</a>
+
+  </div>
+  <div style="color: blueviolet;">
+    {{ calendar }}
+  </div>
+{% endblock %}

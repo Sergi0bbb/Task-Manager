@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="display-4 text-center mb-4">{{ worker.username }}</h1>
+    <p class="text-center lead">
+      ({{ worker.first_name }}, {{ worker.last_name }})</p>
+
+    <h2 class="mt-5">Tasks</h2>
+    <hr>
+
+    <div class="list-group">
+      {% for task in worker.tasks_to_do.all %}
+        <a href="{% url 'tasks:task-detail' task.id %}"
+           class="list-group-item list-group-item-action">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <strong>Task ID: {{ task.id }}</strong> - {{ task.name }}
+            </div>
+            <span class="badge text-white
+             {% if task.priority == "H" %}
+             bg-danger
+             {% elif task.priority == "M" %}
+             bg-primary
+             {% else %}
+             bg-success
+             {% endif %}
+"
+                  style="font-size: 0.9rem; padding: 10px;">{{ task.get_priority_display }}</span>
+
+          </div>
+        </a>
+      {% empty %}
+        <div class="alert alert-info" role="alert">
+          No tasks to display.
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

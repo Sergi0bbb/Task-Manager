@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Task Details - {{ task.name }} - Task Manager{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Task Details</h2>
+
+    <div class="card shadow-lg">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Task Information</h3>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title"><i class="fas fa-tasks"></i> {{ task.name }}
+        </h4>
+
+        <p class="card-text">
+          <strong>Description:</strong> {{ task.description }}</p>
+
+        <p class="card-text">
+          <strong>Deadline:</strong> {{ task.deadline|date:"F j, Y" }}</p>
+
+        <p class="card-text">
+          <strong>Is Completed:</strong>
+          {% if task.is_completed %}
+            <span class="badge badge-success">Yes</span>
+          {% else %}
+            <span class="badge badge-danger">No</span>
+          {% endif %}
+        </p>
+
+        <p class="card-text">
+          <strong>Priority:</strong>
+          <span class="badge badge-info">{{ task.get_priority_display }}</span>
+        </p>
+
+        <p class="card-text"><strong>Task
+          Type:</strong> {{ task.task_type.name }}</p>
+
+        <p class="card-text"><strong>Assignees:</strong></p>
+        <ul class="list-group mb-3">
+          {% for assignee in task.assignees.all %}
+            <li class="list-group-item d-flex align-items-center">
+              <img src="{% static assignee.avatar %}" alt="Assignee Avatar"
+                   class="rounded-circle mr-3" width="40" height="40">
+              <span>{{ assignee.username }}</span>
+            </li>
+          {% empty %}
+            <li class="list-group-item text-muted">No assignees</li>
+          {% endfor %}
+        </ul>
+
+        <p class="card-text"><strong>Giver:</strong> {{ task.giver.username }}
+        </p>
+
+        <div class="mt-4">
+          <a href="{% url 'tasks:calendar' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-calendar-alt"></i> Back to Calendar
+          </a>
+
+          {% if not task.is_completed and user in task.assignees.all %}
+            <form action="{% url 'tasks:complete-task' task.pk %}"
+                  method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-check-circle"></i> Mark as Completed
+              </button>
+            </form>
+          {% endif %}
+
+          {% if user == task.giver or user.position.name == "Project Manager" %}
+            <a href="{% url 'tasks:task-update' task.pk %}"
+               class="btn btn-warning btn-lg">
+              <i class="fas fa-edit"></i> Edit Task
+            </a>
+            <a href="{% url 'tasks:task-delete' task.pk %}"
+               class="btn btn-danger btn-lg">
+              <i class="fas fa-trash-alt"></i> Delete Task
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
