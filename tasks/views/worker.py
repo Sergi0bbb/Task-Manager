@@ -68,7 +68,7 @@ class WorkerCreateView(generic.CreateView):
     model = Worker
     form_class = RegistrationForm
     template_name = "registration/sign_up.html"
-    success_url = reverse_lazy("tasks:index")
+    success_url = reverse_lazy("tasks:home_page")
 
 
 class WorkersDetailView(LoginRequiredMixin, generic.DetailView):

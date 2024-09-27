@@ -10,8 +10,10 @@
           <img src="{% static user.avatar %}" alt="User Avatar"
                class="rounded-circle" width="150" height="150">
         </div>
-
-        <form method="post" action="{% url 'worker-profile' %}">
+        <a class="btn btn-primary" href="{% url 'tasks:select-avatar' %}">
+          Change picture
+        </a>
+        <form method="post" action="{% url 'tasks:worker-profile' %}">
           {% csrf_token %}
           <div class="mb-3">
             <label for="first_name" class="form-label">First Name</label>
