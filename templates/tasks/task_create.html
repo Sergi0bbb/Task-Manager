@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Create New Task - Task Manager{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg">
+          <div class="card-header bg-dark text-white">
+            <h3 class="mb-0">Create New Task</h3>
+          </div>
+          <div class="card-body">
+            <form method="post" action="">
+              {% csrf_token %}
+
+              <div class="form-group mb-4">
+                {{ form.name.label_tag }}
+                {{ form.name|add_class:"form-control" }}
+              </div>
+
+              <div class="form-group mb-4">
+                {{ form.description.label_tag }}
+                {{ form.description|add_class:"form-control" }}
+              </div>
+
+              <div class="form-group mb-4">
+                {{ form.deadline.label_tag }}
+                {{ form.deadline|add_class:"form-control" }}
+              </div>
+
+              <div class="form-group form-check mb-4">
+                {{ form.is_completed|add_class:"form-check-input" }}
+                {{ form.is_completed.label_tag|add_class:"form-check-label" }}
+              </div>
+
+              <div class="form-group mb-4">
+                {{ form.priority.label_tag }}
+                {{ form.priority|add_class:"form-control" }}
+              </div>
+
+              <div class="form-group mb-4">
+                {{ form.task_type.label_tag }}
+                {{ form.task_type|add_class:"form-control" }}
+              </div>
+
+              <div class="form-group mb-4">
+                {{ form.assignees.label_tag }}
+                {{ form.assignees }}
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block btn-lg">
+                  <i class="fas fa-plus-circle"></i> Create Task
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
